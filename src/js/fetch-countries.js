@@ -15,11 +15,7 @@ function fetchCountries(name) {
   return fetch(`${BASE_URL}/name/${name}?fields=name,capital,population,flags,languages`)
     .then(resp => {
       if (!resp.ok) {
-
-        // * 2 вариант
-        // throw new Error(resp.statusText)
-
-        throw new Error('Oops, there is no country with that name')
+        throw new Error(resp.statusText)
       }
       return resp.json();
     });
@@ -27,6 +23,9 @@ function fetchCountries(name) {
 
 export { fetchCountries };
 
+
+// * 3 вариант
+// throw new Error('Oops, there is no country with that name')
 
   // * ЕСЛИ ПО УМОЛЧАНИЮ
 //   .then(resp => {

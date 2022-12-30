@@ -79,16 +79,26 @@ function onSearchCountryInput(e) {
         }
       })
 
-      // * 2 вариант
+      // * 2 вариант при throw new Error(resp.statusText)
       // .catch(error => Notify.failure('Oops, there is no country with that name'));
 
+      // * 3 вариант без вызова ф-и при throw new Error('Oops, ...')
       // .catch(error => Notify.failure(`${error}`));
+      // * через вызов ф-и
+      // .catch(onFetchError);
+
       .catch(onFetchError);
+    // ЛИБО .catch(error => onFetchError(error));
   }
 }
 
-function onFetchError(error) {
-  return Notify.failure(`${error}`);
+// * 3 вариант
+// function onFetchError(error) {
+// return Notify.failure(`${error}`);
+// }
+
+function onFetchError() {
+  return Notify.failure('Oops, there is no country with that name');
 }
 
 function clearCountryList() {
